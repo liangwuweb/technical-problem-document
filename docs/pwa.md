@@ -8,8 +8,8 @@ This document is an exploration of a problem I've met when following the "Buildi
 <img align="left" src="imgs/notification-2.png"  alt="Notification firgue" width="420px" height="auto">
 <img align="right" src="imgs/notification-1.png"  alt="Notification firgue" width="420px" height="auto">
 
-<br clear="left"/>
-<br /H>
+<br clear="both"/>
+<br />
 
 *Firgue 1 The behavior of the ideal push notification*
 
