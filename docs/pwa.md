@@ -29,13 +29,13 @@ Before even talking about my process of investigation, I want to first go throug
 <br clear="both"/>
 <br />
 
-*Firgue 2 The Process sending push notification*
+*Firgue 2 Creating and storing a push subscription*
 
 ### The Encryption
 Before we can dicuss inspect the code, there is another imporant component of the subscriptions, the encryption. When subscribing user to push message, the subscription destails returned by the messaging server contains important information allow any malicious entitiy to send unlimited messages. To make sure only our server is allowed to send messages, the messaging server only accpets message signed with a private key stored on out server. Each private key has a corresponding public key. This public key is send long with scripts to the messaging server when create new subscriptions. It is then stored in the messaging server. This key is only used to verify the message sent from our server to message server are signed with correct private key. (Figure 3)
 
 ![Phase 3](imgs/phase-3.png)
-*Firgue 3 The Process sending push notification*
+*Firgue 3 Sending a push message from the server*
 
 ### Subscribing User to Push Messages 
 
