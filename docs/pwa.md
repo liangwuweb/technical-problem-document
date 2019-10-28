@@ -115,5 +115,14 @@ var notify = function(pushPayload) {
   });
 };
 ```
-Our code begins by requiring db.js,web-push library and push-keys.js. We then use setGCMAPIKey() and setVapidDetails() method to configure out public key and private key. We also use JSON.stringify method to turn *pushPayload* into a string. The *pushPayload* is a obejct that contain all the reservation details include id, arrive date, guests and status. Later on , we will parsed *pushPayload* to make the notification with arrive date on it. Finally, the subscription details objects are fetched from our server's databse, and we use a forEach() to loop all the subscription objects to make sure we send the message to all these subscriptions by using the webpush.sendNotification() method. This method takes two arguments, the first one is the subscription details object. The second one is the message. This message can be a string or object. In our case, it's the pushPayload object string. 
+Our code begins by requiring db.js,web-push library and push-keys.js. We then use setGCMAPIKey() and setVapidDetails() method to configure out public key and private key. We also use JSON.stringify method to turn *pushPayload* into a string. The *pushPayload* is a obejct that contain all the reservation details include id, arrive date, guests and status. Later on , we will parsed *pushPayload* to make the notification with arrive date on it. Finally, the subscription details objects are fetched from our server's databse, and we use a forEach() to loop all the subscription objects to make sure we send the message to all these subscriptions by using the webpush.sendNotification() method to send the all the details to the messaging server. This method takes two arguments, the first one is the subscription details object. The second one is the message. This message can be a string or object. In our case, it's the pushPayload object string. 
+
+Here comes to an important part. The webpush.sendNotification() returns a promise. If it resolves, it means the messaging server determine the message can be queued for sending and we will log "Notification sent" to the console. It fails if anything went wrong and we  catch up with the "Notification failed". This is a significant clue for the investigation. I'll explain it later.
+
+### Using Service Worker Listening for Push Events 
+After we received the message from messaging server, we use service worker to listen for the push event. Now, we have everything we need to show the notification. I won't talk in details for this section since the bug is not occur in this step.
+
+### Use Console.log to Debug
+
+
 
