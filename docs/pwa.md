@@ -123,6 +123,16 @@ Here comes to an important part. The webpush.sendNotification() returns a promis
 After we received the message from messaging server, we use service worker to listen for the push event. Now, we have everything we need to show the notification. I won't talk in details for this section since the bug is not occur in this step.
 
 ### Use Console.log to Debug
+Let refresh the process of our push notification proces. When user click the reservation button, the subscribeUserToNotifications() runs to make a new subscription and save it to out database. Then, our database will use  webpush.sendNotification() to send the message to the messaging server. Finally, the service worker will receive the message from the messaging server. 
+
+I mentioned that our design did not work. I found the console keep log "notification failed". I know the problem must occur in webpush.sendNotification(), since we place a console.log("notification failed") when the promise failed. The webpush.sendNotification() sends message to the messaging server. This method returns a promise, and it failed if messaging server cannot forward this message. There are five "notification failed" logs in the console, which equal to the number of subscription objects in our *server/db.json* file. No doubt, there are something wrong with our subscription objects. As we know, our subscription object contains a public key to be match with a private key. I think this public key might be expired. When the messaging try to matach two keys,it did not match. As a consequence, the promise returned by webpush.sendNotification() failed becasue messaging server cancel the forwarding.
+
+![notification failed](imgs/fail.png)
+![subscription object](imgs/sub.png)
+*Firgue 4 Notification Failed and Subscription Object*
+
+## Resolve the problem
+Since we found the problem is casue by mismatch of the public key and private key. We can just generate new public key and private key and distribute them in the correct place, and the notification will work as it suppose to be!
 
 
 
