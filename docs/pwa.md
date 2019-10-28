@@ -24,7 +24,7 @@ Before even talking about my process of investigation, I want to first go throug
 <br/>
 
 <img align="left" src="imgs/phase-1.png"  alt="Notification firgue" width="400px" height="auto">
-<img align="right" src="imgs/phase-2.png"  alt="Notification firgue" width="430px" height="auto">
+<img align="right" src="imgs/phase-2.png"  alt="Notification firgue" width="410px" height="auto">
 
 <br clear="both"/>
 <br />
