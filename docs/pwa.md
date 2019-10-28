@@ -39,7 +39,7 @@ Before we can dicuss inspect the code, there is another imporant component of th
 
 ### Subscribing User to Push Messages 
 
-After review the process of sending push notification and encryption, let's focus on the code we wrote to make that happen. First, we added following code to create a new subscription and store the details on our server. 
+After review the process of sending push notification and encryption, let's focus on the code we wrote to make that happen. By inspect the code, we will find the reason casue this issue. First,  we added following code to create a new subscription and store the details on our server in *js/my-account.js*. 
 
 ```javascript
 var subscribeUserToNotifications = function() {
@@ -78,3 +78,42 @@ var offerNotification = function () {
       }
 };
 ```
+We begin by subscribeUserToNotifications(), this function first request permission from user, if user granted the permission, it then create a new subscription and use push manager's subscribe method sending the subscription to the messaging server, and the messeging server will retrun a promise that resolves to an object with subscription details. This details will then be sent to our server. In addtion, you can find there is an applicationServerKey, this key is the public key we send to the messaging server.
+
+The offerNotification just check the browser support the service worker, push mananger and notificatin. If supported, it will excute the subscribeUserToNotifications().
+
+Now we've create a new subscription and store the details into our server. Let's send a message from our server to the user in next step.
+
+### Sending the Push Events from our Server to the messaging server
+
+We added following code in the *subscription.js*
+
+```JavaScript
+var db = require("./db.js");
+var webpush = require("web-push");
+var pushKeys = require("./push-keys.js");
+
+var notify = function(pushPayload) {
+  pushPayload = JSON.stringify(pushPayload);
+  webpush.setGCMAPIKey(pushKeys.GCMAPIKey);
+  webpush.setVapidDetails(
+    pushKeys.subject,
+    pushKeys.publicKey,
+    pushKeys.privateKey
+  );
+
+  var subscriptions = db.get("subscriptions").value();
+  subscriptions.forEach(function(subscription) {
+    webpush
+      .sendNotification(subscription, pushPayload)
+      .then(function() {
+        console.log("Notification sent");
+      })
+      .catch(function() {
+        console.log("Notification failed");
+      });
+  });
+};
+```
+Our code begins by requiring db.js,web-push library and push-keys.js. We then use setGCMAPIKey() and setVapidDetails() method to configure out public key and private key. We also use JSON.stringify method to turn *pushPayload* into a string. The *pushPayload* is a obejct that contain all the reservation details include id, arrive date, guests and status. Later on , we will parsed *pushPayload* to make the notification with arrive date on it. Finally, the subscription details objects are fetched from our server's databse, and we use a forEach() to loop all the subscription objects to make sure we send the message to all these subscriptions by using the webpush.sendNotification() method. This method takes two arguments, the first one is the subscription details object. The second one is the message. This message can be a string or object. In our case, it's the pushPayload object string. 
+
