@@ -36,3 +36,45 @@ Before we can dicuss inspect the code, there is another imporant component of th
 
 ![Phase 3](imgs/phase-3.png)
 *Firgue 3 The Process sending push notification*
+
+### Subscribing User to Push Messages 
+
+After review the process of sending push notification and encryption, let's focus on the code we wrote to make that happen. First, we added following code to create a new subscription and store the details on our server. 
+
+```javascript
+var subscribeUserToNotifications = function() {
+  Notification.requestPermission().then(function(permission){
+    if (permission === "granted") {
+      var subscribeOptions = {
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUnit8Array("BIF-3qSLfdr_cXp7cbY5LS83mCs4vA4mhKStWZw8nDfbuy3EYdZvwMEaE0_5FDd33b80GwywuicCz54K0sqhwtU")
+      };
+      navigator.serviceWorker.ready.then(function(registration){
+        return registration.pushManager.subscribe(subscribeOptions);
+      }).then(function(subscription){
+        var fetchOptions = {
+          method: "post",
+          headers: new Headers({
+            "Content-Type": "application/json"
+          }),
+          body: JSON.stringify(subscription)
+        };
+        return fetch("/add-subscription", fetchOptions);
+      }).catch(function(){
+        console.log("encode failed");
+      });
+    }
+  });
+};
+
+var offerNotification = function () {
+  if ("Notification" in window && 
+      "serviceWorker" in navigator && "PushManager" in window) {
+        Notification.requestPermission().then(function(permission){
+          if (permission === "granted") {
+            subscribeUserToNotifications();
+          }
+        });
+      }
+};
+```
