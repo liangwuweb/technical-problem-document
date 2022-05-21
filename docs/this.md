@@ -91,6 +91,21 @@ If you do not want to use arrow functions. You can store `this` into a varible a
     });
   }
 ```
+## Don't use arrow function in Vue methods or computed
+The arrow function lost the Vue component context. For your functions in methods, computed, watch, etc., use the Object functions:
+```
+computed:{
+    switchRed() {
+        return {red: this.turnRed}
+    },
+    switchGreen() {
+        return {green: this.turnGreen}
+    },
+    switchBlue() {
+        return {blue: this.turnBlue}
+    }
+}
+```
 
 References: <br />
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this <br />
