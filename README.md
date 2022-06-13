@@ -1,6 +1,13 @@
-Technical Problem Documentation
+A docuemntation that document my study Notes and issues I've solved in the development.
 
-## Index
+## Devlopment Issues
 
 * [Push notification cannot show in "Building Progressive Web Apps" by Tal Ater](/docs/pwa.md)
+
+
+## Study Notes
+
 * [The difference of JavaScript this keyword in Arrow Function and Regular Function](/docs/this.md)
+
+  ### JavaScript
+  * Prototype, constructor & __ Proto__ (/docs/js_proto.md)
