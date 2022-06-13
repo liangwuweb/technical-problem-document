@@ -10,4 +10,4 @@ A docuemntation that document my study Notes and issues I've solved in the devel
 * [The difference of JavaScript this keyword in Arrow Function and Regular Function](/docs/this.md)
 
   ### JavaScript
-  * Prototype, constructor & __ Proto__ (/docs/js_proto.md)
+  * [Prototype, constructor & __ Proto__ ](/docs/js_proto.md)
