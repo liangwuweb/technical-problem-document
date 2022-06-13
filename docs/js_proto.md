@@ -22,7 +22,7 @@ function Foo() {...};
 let f1 = new Foo();
 ```
 
-![关系图](imgs/fail.png)
+![关系图](imgs/Screen Shot 2021-09-16 at 1.25.14 PM.png)
 
 
 
