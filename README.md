@@ -11,3 +11,4 @@ A docuemntation that document my study Notes and issues I've solved in the devel
 
   ### JavaScript
   * [Prototype, constructor & __ Proto__ ](/docs/js_proto.md)
+  * [Constructor Inheritance](/docs/constructor_inheritance.md)
