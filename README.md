@@ -14,4 +14,4 @@ A docuemntation that document my study Notes and issues I've solved in the devel
   * [Constructor Inheritance](/docs/constructor_inheritance.md)
 
   ### Git
-  * [warning: LF will be replaced by CRLF](/docs/lf_crlf.md)
+  * [warning: LF will be replaced by CRLF](/docs/lf-crlf.md)
