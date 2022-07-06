@@ -22,3 +22,5 @@ A docuemntation that document my study Notes and issues I've solved in the devel
   * [ISSUE: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost'](/docs/laravel_issue1.md)
   * [Laravel Category (has database) page loading forever, SQLSTATE[HY000] [2002] Connection timed out](/docs/laravel_issue2.md)
   * [Asynchronous JS and 异步方案](/docs/async.md)
+  
+  ### WSL2
