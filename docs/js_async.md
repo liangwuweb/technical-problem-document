@@ -3,8 +3,8 @@
 - [3. 常见异步任务](#3-常见异步任务)
    - [3.1 SetTimeOut&setInterval](#3-1-SetTimeOut-and-setInterval)
    - [3.2 IO](#3-2-IO)
-- [4. 线程|事件循环|任务队列](#4-线程|事件循环|任务队列)
-   - [4.1 JS的线程](#list-checkbox)
+- [4. 线程|事件循环|任务队列](#4-线程_事件循环_任务队列)
+   - [4.1 JS的线程](#4-1-JS的线程)
    - [4.2 任务队列 task queue](#getting-started-with-markdown)
    - [4.3 事件循环 event loop](#getting-started-with-markdown)
 - [5. 一段话概括JS异步](#getting-started-with-markdown)
@@ -66,4 +66,11 @@ from the output 可见，尽管我们设置了setTimeout（function，time）中
 ## 3-2 IO
 前面说过了，I/O操作(input/output), 属于异步任务。比如ajax请求，当我们向server发出请求时，我们不需要等，晚点再来处理ajax的response。
 
-# 4-线程|事件循环|任务队列
+# 4-线程_事件循环_任务队列
+## 4-1 JS的线程
+
+**其实同步和异步，无论如何，做事情的时候都是只有一条流水线（单线程），同步和异步的差别就在于这条流水线上各个流程的执行顺序不同。**
+
+这里有人就会问到，JavaScript明明单线程语言，但又同时可进行异步操作，这两者不是完全相反的概念吗？没错，JavaScript是单线程，它的宿主，**浏览器**可**不是单线程**的。
+
+Javascript是单线程的，但是却能执行异步任务，这主要是因为 JS 中存在**`事件循环`（Event Loop）和`任务队列`（Task Queue）**。
