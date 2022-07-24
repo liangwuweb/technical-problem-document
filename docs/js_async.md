@@ -3,7 +3,7 @@
 - [3. 常见异步任务](#3-常见异步任务)
    - [3.1 SetTimeOut&setInterval](#3-1-SetTimeOut-and-setInterval)
    - [3.2 IO](#3-2-IO)
-- [4. 线程、事件循环，任务队列](#4-线程|事件循环|任务队列)
+- [4. 线程|事件循环|任务队列](#4-线程|事件循环|任务队列)
    - [4.1 JS的线程](#list-checkbox)
    - [4.2 任务队列 task queue](#getting-started-with-markdown)
    - [4.3 事件循环 event loop](#getting-started-with-markdown)
