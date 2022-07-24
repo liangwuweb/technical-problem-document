@@ -3,7 +3,7 @@
 - [3. 常见异步任务](#3-常见异步任务)
    - [3.1 SetTimeOut&setInterval](#3-1-SetTimeOut-and-setInterval)
    - [3.2 IO](#3-2-IO)
-- [4. 线程、事件循环，任务队列](#4-线程事件循环任务队列)
+- [4. 线程、事件循环，任务队列](#4-线程|事件循环|任务队列)
    - [4.1 JS的线程](#list-checkbox)
    - [4.2 任务队列 task queue](#getting-started-with-markdown)
    - [4.3 事件循环 event loop](#getting-started-with-markdown)
@@ -66,4 +66,4 @@ from the output 可见，尽管我们设置了setTimeout（function，time）中
 ## 3-2 IO
 前面说过了，I/O操作(input/output), 属于异步任务。比如ajax请求，当我们向server发出请求时，我们不需要等，晚点再来处理ajax的response。
 
-# 4-线程事件循环任务队列
+# 4-线程|事件循环|任务队列
