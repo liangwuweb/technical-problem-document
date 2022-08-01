@@ -5,8 +5,8 @@
    - [3.2 IO](#3-2-IO)
 - [4. 线程|事件循环|任务队列](#4-线程_事件循环_任务队列)
    - [4.1 JS的线程](#4-1-JS的线程)
-   - [4.2 任务队列 task queue](#getting-started-with-markdown)
-   - [4.3 事件循环 event loop](#getting-started-with-markdown)
+   - [4.2 任务队列 task queue](#4-2-任务队列task_queue)
+   - [4.3 事件循环 event loop](#4-3-事件循环event_loop)
 - [5. 一段话概括JS异步](#getting-started-with-markdown)
 - [6. 异步方案](#getting-started-with-markdown)
   - [Promise](#getting-started-with-markdown)
@@ -74,3 +74,25 @@ from the output 可见，尽管我们设置了setTimeout（function，time）中
 这里有人就会问到，JavaScript明明单线程语言，但又同时可进行异步操作，这两者不是完全相反的概念吗？没错，JavaScript是单线程，它的宿主，**浏览器**可**不是单线程**的。
 
 Javascript是单线程的，但是却能执行异步任务，这主要是因为 JS 中存在**`事件循环`（Event Loop）和`任务队列`（Task Queue）**。
+
+
+## 4-2 任务队列task_queue
+
+异步操作会将相关异步任务加到任务队列中。任务队列是用来存储各种events的地方。主线程中的同步任务全部清空之后，主线程才会去查看任务队列。
+
+而不同的异步操作添加到任务队列的时机也不同，如**`onclick`, `setTimeout`,`ajax`** 处理的方式都不同，这些异步操作是由浏览器内核的**`webcore`**来执行的，`webcore`包含下图中的3种 webAPI，分别是**`DOM Binding`、`network`、`timer`模块。**
+
+- **DOM Binding** 模块处理一些DOM绑定事件，如`onclick`事件触发时，回调函数会立即被`webcore`添加到任务队列中。
+- **network** 模块处理`Ajax`请求，在网络请求返回时，才会将对应的回调函数添加到任务队列中。
+- **timer** 模块会对`setTimeout`等计时器进行**延时处理**，当时间到达的时候，才会将回调函数添加到任务队列中。
+
+## 4-3 事件循环event_loop
+![image](https://user-images.githubusercontent.com/44330488/182200584-40db560f-1025-4025-9a8f-13251c7a4bd0.png)
+![image](https://user-images.githubusercontent.com/44330488/182200653-4a77ec2c-97fa-4889-a8e0-9d88c49e9dfe.png)
+
+一个事件循环就是它听起来的样子，有一个event的队列（所有发生的event都存储在这里——上图中称为“任务队列”）还有一个loop，它不断地将这些event从队列中取出，并调用事件中的回调（call stack会执行所有的回调）。API是用于处理异步函数的API，比如说处理等待来自客户端或server的响应。
+
+在此流程中，所有function call首先进入call stack，然后通过**API**执行异步任务。当异步任务完成后，callback进入**任务队列**，然后再次进入call stack。当任务执行完之后，event loop会再次去task queue重复上面的流程。
+
+[**check this video for more detail about event loop**](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
+
